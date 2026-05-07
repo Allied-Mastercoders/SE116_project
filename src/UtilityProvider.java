@@ -1,3 +1,6 @@
+import java.util.LinkedList;
+import java.util.Queue;
+
 abstract class UtilityProvider extends Cell{
     protected int capacity = 100;
     public UtilityProvider(int x, int y, char type) {
@@ -13,7 +16,18 @@ abstract class UtilityProvider extends Cell{
         this.capacity = capacity;
     }
 
-    public void distributeUtility(UtilityProvider provider, Cell[][] grid, int i, int j){
+    public void distributeUtility( Cell[][] grid, int i, int j){//utilty provider is deleted because of we have this command
+        boolean[][] visited = new boolean[i][j];
+        Queue<int[]> queue = new LinkedList<>();//list of control
+        int remaining =  capacity;
+        visited[x][y] = true;
+
+
+
+
+
+
+
     }
 }
 
