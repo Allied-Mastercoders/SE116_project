@@ -1,0 +1,60 @@
+import java.io.BufferedReader;
+import java.io.FileReader;
+import java.io.IOException;
+import java.util.ArrayList;
+import java.util.List;
+
+public class BufferReader {
+
+    public Cell[][] loadMap(String filePath) {
+        List<String> lines = new ArrayList<>();
+
+        try (BufferedReader buff = new BufferedReader(new FileReader(filePath))) {
+            String line;
+            while ((line = buff.readLine()) != null) {
+                if (!line.trim().isEmpty()) {
+                    lines.add(line);
+                }
+            }
+        } catch (IOException e) {
+            throw new SE116ConfigurationException("File can not be read: " + filePath);
+        }
+
+        if (lines.isEmpty()) {
+            throw new SE116ConfigurationException("File is empty");
+        }
+
+        int row = lines.size();
+        int col = lines.getFirst().length();
+        Cell[][] grid = new Cell[row][col];
+
+        for (int i = 0;i < row;i++) {
+            String currentLine = lines.get(i);
+            for (int j = 0;j < col;j++) {
+                char type = currentLine.charAt(j);
+                grid[i][j] = createCell(type, i, j);
+            }
+        }
+        return grid;
+    }
+
+    private Cell createCell(char type, int x, int y) {
+        switch (type) {
+            case 'H' -> {return new Housing(x, y);}
+            case 'I' -> {return new Industrial(x, y);}
+            case 'C' -> {return new Commercial(x, y);}
+            case 'R' -> {return new Road(x, y);}
+            case 'P' -> {return new PowerPlant(x, y);}
+            case 'W' -> {return new WaterPumpingStation(x, y);}
+            case 'T' -> {return new InternetHub(x, y);}
+            case 'F' -> {return new PoliceStation(x, y);}
+            case 'D' -> {return new Hospital(x, y);}
+            case 'S' -> {return new School(x, y);}
+            case 'E' -> {return new Empty(x, y);}
+            default -> {
+                throw new SE116ConfigurationException("Unknown place type: " + type);
+            }
+        }
+    }
+}
+
