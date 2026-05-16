@@ -16,11 +16,21 @@ abstract class UtilityProvider extends Cell{
         this.capacity = capacity;
     }
 
-    public void distributeUtility( Cell[][] grid, int i, int j){//utilty provider is deleted because of we have this command
+    public void distributeUtility( Cell[][] grid, int i, int j){// updated 1
         boolean[][] visited = new boolean[i][j];
         Queue<int[]> queue = new LinkedList<>();//list of control
         int remaining =  capacity;
         visited[x][y] = true;
+        queue.add(new int[] {x,y});
+        while(!(queue.isEmpty())&& remaining>0) {
+            int[] cur = queue.poll();
+            int cx = cur[0]; //first x cordinate
+            int cy = cur[1]; // first y cordinate
+
+
+
+
+        }
 
 
 
