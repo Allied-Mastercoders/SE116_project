@@ -6,7 +6,6 @@ abstract class UtilityProvider extends Cell{
     public UtilityProvider(int x, int y, char type) {
         super(x, y, type);
     }
-    public abstract String getUtilityType();
 
     public int getCapacity() {
         return capacity;
@@ -16,38 +15,58 @@ abstract class UtilityProvider extends Cell{
         this.capacity = capacity;
     }
 
-    public void distributeUtility( Cell[][] grid, int i, int j){// updated 1
-        boolean[][] visited = new boolean[i][j];
-        Queue<int[]> queue = new LinkedList<>();//list of control
-        int remaining =  capacity;
-        visited[x][y] = true;
-        queue.add(new int[] {x,y});
-        while(!(queue.isEmpty())&& remaining>0) {
-            int[] cur = queue.poll();
-            int cx = cur[0]; //first x cordinate
-            int cy = cur[1]; // first y cordinate
+    public void distributeUtility(UtilityProvider provider, Cell[][] grid){
+        boolean[][] visited=new boolean[grid.length][grid[0].length];
+        Queue<int[]> queue=new LinkedList<>();
+        int remaining=provider.getCapacity();
+        char utilityType=provider.getType();
+        queue.add(new int[]{provider.x, provider.y});
+        visited[provider.x][provider.y] = true;
+        int[][] neighbors = {{1,0},{0,1},{-1,0},{0,-1}};
 
+        while (!queue.isEmpty() && remaining>0) {
+            int[] currentCoord =queue.poll();
+            int x = currentCoord[0];
+            int y = currentCoord[1];
 
+            for (int[] direction : neighbors) {
+                int neighborX = x + direction[0];
+                int neighborY = y + direction[1];
 
+                if ((neighborX <0 || neighborY <0) || (neighborX >=grid.length || neighborY >= grid[0].length)){
+                    continue;
+                }
+                if (visited[neighborX][neighborY]) {
+                    continue;
+                }
+                Cell neighbor = grid[neighborX][neighborY];
+                if (neighbor instanceof EmptyCell) {
+                    continue;
+                }
 
+                visited[neighborX][neighborY] = true;
+
+                if (neighbor instanceof Zone) {
+                    Zone zone = (Zone) neighbor;
+                    int demand=zone.getDemand(utilityType);
+                    int given;
+                    if(demand>remaining) given=remaining;
+                    else given=demand;
+                    zone.receiveUtility(utilityType, given);
+                    remaining=remaining-given;
+                }
+
+                if ((neighbor instanceof Road)||(neighbor instanceof Zone)){
+                    queue.add(new int[]{neighborX, neighborY});
+                }
+            }
         }
-
-
-
-
-
-
-
     }
 }
 
 class PowerPlant extends UtilityProvider {
     public PowerPlant(int x, int y) {
         super(x, y, 'P');
-    }
-    @Override
-    public String getUtilityType(){
-        return "P";
     }
 }
 
@@ -56,19 +75,9 @@ class WaterPumpingStation extends UtilityProvider {
     public WaterPumpingStation(int x, int y) {
         super(x, y, 'W');
     }
-    @Override
-    public String getUtilityType(){
-        return "W";
-    }
 }
-
-
-class InternetHub extends UtilityProvider {
+class InternetHub extends UtilityProvider{
     public InternetHub(int x, int y) {
         super(x, y, 'T');
-    }
-    @Override
-    public String getUtilityType(){
-        return "T";
     }
 }
