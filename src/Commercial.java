@@ -13,7 +13,7 @@ public class Commercial extends Zone{
         } else {
             boolean canBeLevel1 = (populationPool > 0 && goodsPool > 0);
             boolean canBeLevel2 = canBeLevel1 && hasSecurity;
-            boolean canBeLevel3 = canBeLevel2;
+            boolean canBeLevel3 = canBeLevel2 && populationPool>1;
 
             int targetLevel;
 
