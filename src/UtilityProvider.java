@@ -48,7 +48,7 @@ abstract class UtilityProvider extends Cell{
 
                 if (neighbor instanceof Zone) {
                     Zone zone = (Zone) neighbor;
-                    int demand=zone.getDemand(utilityType);
+                    int demand=zone.getUtilityDemand();
                     int given;
                     if(demand>remaining) given=remaining;
                     else given=demand;
