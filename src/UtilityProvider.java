@@ -40,7 +40,7 @@ abstract class UtilityProvider extends Cell{
                     continue;
                 }
                 Cell neighbor = grid[neighborX][neighborY];
-                if (neighbor instanceof EmptyCell) {
+                if (neighbor instanceof Empty) {
                     continue;
                 }
 
