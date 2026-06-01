@@ -26,7 +26,7 @@ abstract class Zone extends Cell {
             case 'W':
                 this.waterReceived+=amount;
                 break;
-            case 'I':
+            case 'T':
                 this.internetReceived+=amount;
                 break;
         }
