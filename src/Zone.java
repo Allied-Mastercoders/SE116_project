@@ -16,8 +16,24 @@ abstract class Zone extends Cell {
         electricityReceived = waterReceived = internetReceived = 0;
     }
 
+    public int getUtilityDemand() {return utilityDemand;}
+
+    public void receiveUtility(char type, int amount) {
+        switch (type) {
+            case 'P':
+                this.electricityReceived+=amount;
+                break;
+            case 'W':
+                this.waterReceived+=amount;
+                break;
+            case 'I':
+                this.internetReceived+=amount;
+                break;
+        }
+    }
+
     public void setElectricityReceived(int electricityReceived) {
-        this.electricityReceived = electricityReceived;
+        this.electricityReceived += electricityReceived;
         if(type == 'H'){
             System.out.println("House at ("+x+","+y+") received "+electricityReceived+ " electricity");
         }
@@ -31,7 +47,7 @@ abstract class Zone extends Cell {
     }
 
     public void setInternetReceived(int internetReceived) {
-        this.internetReceived = internetReceived;
+        this.internetReceived += internetReceived;
         if(type == 'H'){
             System.out.println("House at ("+x+","+y+") received "+internetReceived+ " internet");
         }
@@ -41,7 +57,7 @@ abstract class Zone extends Cell {
     }
 
     public void setWaterReceived(int waterReceived) {
-        this.waterReceived = waterReceived;
+        this.waterReceived += waterReceived;
         if(type == 'H'){
             System.out.println("House at ("+x+","+y+") received "+waterReceived+ " water");
         }
@@ -70,7 +86,7 @@ abstract class Zone extends Cell {
     public void setHasSecurity(boolean hasSecurity) {
         this.hasSecurity = hasSecurity;
         if(type == 'H'){
-            if(hasEducation) System.out.println("House at ("+x+","+y+") received security service");
+            if(hasSecurity) System.out.println("House at ("+x+","+y+") received security service");
         }
         if(type == 'I'){
             if(hasSecurity) System.out.println("Industrial at ("+x+","+y+") received security service");
