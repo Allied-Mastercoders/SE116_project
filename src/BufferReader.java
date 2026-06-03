@@ -17,11 +17,11 @@ public class BufferReader {
                 }
             }
         } catch (IOException e) {
-            throw new SE116ConfigurationException("File can not be read: " + filePath);
+            throw new IllegalArgumentException("File can not be read: " + filePath);
         }
 
         if (lines.isEmpty()) {
-            throw new SE116ConfigurationException("File is empty");
+            throw new IllegalArgumentException("File is empty");
         }
 
         int row = lines.size();
