@@ -38,7 +38,7 @@ public class BufferReader {
         return grid;
     }
 
-    private Cell createCell(char type, int x, int y) {
+    private Cell createCell(int x, int y, char type) {
         switch (type) {
             case 'H' -> {return new Housing(x, y);}
             case 'I' -> {return new Industrial(x, y);}
