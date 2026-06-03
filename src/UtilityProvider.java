@@ -15,13 +15,13 @@ abstract class UtilityProvider extends Cell{
         this.capacity = capacity;
     }
 
-    public void distributeUtility(UtilityProvider provider, Cell[][] grid){
+    public void distributeUtility(Cell[][] grid){
         boolean[][] visited=new boolean[grid.length][grid[0].length];
         Queue<int[]> queue=new LinkedList<>();
-        int remaining=provider.getCapacity();
-        char utilityType=provider.getType();
-        queue.add(new int[]{provider.x, provider.y});
-        visited[provider.x][provider.y] = true;
+        int remaining=this.getCapacity();
+        char utilityType=this.getType();
+        queue.add(new int[]{this.x, this.y});
+        visited[this.x][this.y] = true;
         int[][] neighbors = {{1,0},{0,1},{-1,0},{0,-1}};
 
         while (!queue.isEmpty() && remaining>0) {
