@@ -52,7 +52,7 @@ public class BufferReader {
             case 'S' -> {return new School(x, y);}
             case 'E' -> {return new Empty(x, y);}
             default -> {
-                throw new SE116ConfigurationException("Unknown place type: " + type);
+                throw new IllegalArgumentException("Unknown place type: " + type);
             }
         }
     }
