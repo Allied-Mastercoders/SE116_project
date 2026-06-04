@@ -24,11 +24,11 @@ public class Commercial extends Zone{
 
             if (targetLevel > level) {
                 level++;
-                System.out.println("Commercial at ("+x+","+y+") upgraded to level "+level);
+                System.out.println("Commercial at ("+x+","+y+") levels up from " +(level-1)+" to "+level);
             }
             else if (targetLevel < level) {
                 level--;
-                System.out.println("Commercial at ("+x+","+y+") reduced to level "+level);
+                System.out.println("Commercial at ("+x+","+y+") levels down from " +(level+1)+" to "+level);
             }
         }
 

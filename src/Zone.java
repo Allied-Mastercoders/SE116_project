@@ -21,13 +21,13 @@ abstract class Zone extends Cell {
     public void receiveUtility(char type, int amount) {
         switch (type) {
             case 'P':
-                this.electricityReceived+=amount;
+                this.setElectricityReceived(amount);
                 break;
             case 'W':
-                this.waterReceived+=amount;
+                this.setWaterReceived(amount);
                 break;
             case 'T':
-                this.internetReceived+=amount;
+                this.setInternetReceived(amount);
                 break;
         }
     }

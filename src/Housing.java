@@ -24,11 +24,11 @@ public class Housing extends Zone {
 
             if (targetLevel > level) {
                 level++;
-                System.out.println("House at ("+x+","+y+") upgraded to level "+level);
+                System.out.println("House at ("+x+","+y+") levels up from " +(level-1)+" to "+level);
             }
             else if (targetLevel < level) {
                 level--;
-                System.out.println("House at ("+x+","+y+") reduced to level "+level);
+                System.out.println("House at ("+x+","+y+") levels down from " +(level+1)+" to "+level);
             }
         }
 
