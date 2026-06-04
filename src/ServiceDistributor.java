@@ -1,7 +1,7 @@
 import java.util.ArrayList;
 import java.util.List;
 
-public class ServiceManager {
+public class ServiceDistributor {
     private List<Zone> zones;
     private List<ServiceProvider> serviceProviders;
 
@@ -28,23 +28,19 @@ public class ServiceManager {
             z.hasEducation = false;
         }
 
-        for (ServiceProvider s : serviceProviders) {
-            int r = s.getRadius();
-
-            for (Zone z : zones) {
-                if (z.getX() >= s.getX() - r &&
-                        z.getX() <= s.getX() + r &&
-                        z.getY() >= s.getY() - r &&
-                        z.getY() <= s.getY() + r) {
-
+        for(ServiceProvider s : serviceProviders) {
+                double radius = s.getRadius();
+                for(Zone z : zones) {
+                double distance = Math.sqrt(Math.pow(z.getX()-s.getX(),2)+(Math.pow(z.getY()-s.getY(),2)));
+                if(distance<=radius) {
                     if (s instanceof PoliceStation) {
-                        z.setHasSecurity(true);
+                        if(!z.hasSecurity)z.setHasSecurity(true);
                     }
-                    else if (s instanceof Hospital) {
-                        z.setHasHealth(true);
+                    if (s instanceof Hospital) {
+                        if(!z.hasHealth)z.setHasHealth(true);
                     }
-                    else if (s instanceof School) {
-                        z.setHasEducation(true);
+                    if (s instanceof School) {
+                        if(!z.hasEducation)z.setHasEducation(true);
                     }
                 }
             }
