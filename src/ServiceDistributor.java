@@ -28,22 +28,26 @@ public class ServiceDistributor {
             z.hasEducation = false;
         }
 
-        for(ServiceProvider s : serviceProviders) {
+        
+            for(ServiceProvider s : serviceProviders) {
                 double radius = s.getRadius();
                 for(Zone z : zones) {
-                double distance = Math.sqrt(Math.pow(z.getX()-s.getX(),2)+(Math.pow(z.getY()-s.getY(),2)));
-                if(distance<=radius) {
-                    if (s instanceof PoliceStation) {
-                        if(!z.hasSecurity)z.setHasSecurity(true);
+                    double distance = Math.sqrt(Math.pow(z.getX()-s.getX(),2)+(Math.pow(z.getY()-s.getY(),2)));//squareroot a2 +b2
+                    if(distance<=radius) {
+                        if (s instanceof PoliceStation) {
+                            if(!z.isHasSecurity())z.setHasSecurity(true);
+                        }
+                        if (s instanceof Hospital) {
+                            if(!z.isHasHealth())z.setHasHealth(true);
+                        }
+                        if (s instanceof School) {
+                            if(!z.isHasEducation())z.setHasEducation(true);
+                        }
+
                     }
-                    if (s instanceof Hospital) {
-                        if(!z.hasHealth)z.setHasHealth(true);
-                    }
-                    if (s instanceof School) {
-                        if(!z.hasEducation)z.setHasEducation(true);
-                    }
+
                 }
             }
         }
     }
-}
+
