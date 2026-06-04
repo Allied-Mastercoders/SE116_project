@@ -70,12 +70,12 @@ class PowerPlant extends UtilityProvider {
     }
 }
 
-
 class WaterPumpingStation extends UtilityProvider {
     public WaterPumpingStation(int x, int y) {
         super(x, y, 'W');
     }
 }
+
 class InternetHub extends UtilityProvider{
     public InternetHub(int x, int y) {
         super(x, y, 'T');
