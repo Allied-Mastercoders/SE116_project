@@ -8,8 +8,8 @@ public class Main {
 
 
     public static void main(String[] args) {
-        if (args.length != 2) {
-                System.out.println("Usage : java Main <map_file> <ticks>");
+        if (args==null || args.length!=2) {
+                throw new IndexOutOfBoundsException("Usage : java Main <map_file> <ticks>");
         }
         String mapFilePath = args[0];
         int ticks = 0;
